@@ -1,1 +1,44 @@
+import pandas as pd
 
+def Read_Excel_File():
+    input_file = input("Enter file name: ")
+    file_name = pd.ExcelFile(input_file)
+    name_of_sheets = file_name.sheet_names
+
+    num_of_sheets = len(name_of_sheets)
+
+    #print(name_of_sheets)
+    #print(num_of_sheets)
+
+    print('\n')
+    for i in range(num_of_sheets):
+        print(i+1,name_of_sheets[i])
+
+    print("\nIn which Sheet you want to search: ")
+    user_choice = int(input())
+
+    var1 = pd.read_excel(file_name, sheet_name = name_of_sheets[user_choice-1])
+    var2 = var1.head()
+    var3 = list(var2)
+    length = len(var3)
+
+    print('\n')
+    for j in range(length):
+        print(j+1,var3[j])
+
+    print("\nSelect the Parameter for search: ")
+    parameter = int(input())
+
+    res1 = pd.read_excel(file_name, sheet_name = name_of_sheets[user_choice-1])
+    res2 = res1[[var3[parameter-1]]]
+    res3 = res2.dtypes
+
+    length_of_col = len(res2)
+    #print(length_of_col)
+
+    # print('Enter '+ str(var3[parameter-1]))
+    # usr_input = input()
+    # print(type(res2))
+
+
+Read_Excel_File()
